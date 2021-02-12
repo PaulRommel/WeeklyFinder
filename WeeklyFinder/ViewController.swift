@@ -2,34 +2,41 @@
 //  ViewController.swift
 //  WeeklyFinder
 //
-//  Created by Павел Попов on 29.01.2021.
+//  Created by Павел Попов on 11.02.2021.
 //
 
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var dateTF: UITextField!
     @IBOutlet weak var monthTF: UITextField!
-    @IBOutlet weak var yearTF: UITextField!    
+    @IBOutlet weak var yearTF: UITextField!
     @IBOutlet weak var resultLabel: UILabel!
-     
+    
     @IBAction func findDay(_ sender: UIButton) {
+        
+        guard let day = dateTF.text, let month = monthTF.text, let year = yearTF.text else {
+            print("not all data entered")
+            return
+        }
         
         let calendar = Calendar.current
         var dateComponents = DateComponents()
-        dateComponents.day = Int(dateTF.text!)
-        dateComponents.month = Int(monthTF.text!)
-        dateComponents.year = Int(yearTF.text!)
+            dateComponents.day = Int(day)
+            dateComponents.month = Int(month)
+            dateComponents.year = Int(year)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
+            dateFormatter.locale = Locale(identifier: "ru_Ru")
+            dateFormatter.dateFormat = "EEEE"
         
-        let data = calendar.date(from: dateComponents)
+        guard let data = calendar.date(from: dateComponents) else {return}
         
-        let weekday = dateFormatter.string(from: data!)
+        let weekday = dateFormatter.string(from: data)
+        let capitalizedWeekday = weekday.capitalized
         
-        resultLabel.text = weekday
+        resultLabel.text = capitalizedWeekday
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

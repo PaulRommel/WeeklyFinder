@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  WeeklyFinder
 //
-//  Created by Павел Попов on 29.01.2021.
+//  Created by Павел Попов on 11.02.2021.
 //
 
 import UIKit
